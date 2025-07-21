@@ -13,6 +13,8 @@ const generateToken = (user) => {
 // Signup
 export const signup = async (req, res) => {
   try {
+
+    
     const { name, email, password } = req.body;
 
     const userExists = await User.findOne({ email });
