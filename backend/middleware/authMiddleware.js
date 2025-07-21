@@ -10,11 +10,16 @@ export const authMiddleware = async(req, res, next) => {
         const token = authHeader.split(' ')[1]
        const verified = jwt.verify(token, process.env.JWT_SECRET)
       
+       req.user = {
+        id: verified.id,
+        role: decoded.role,
+       }
 
-        res.status(201).json(verified)
+       next()
        
     }
     catch(error){
+        res.status(401).json({message: "Invalid or expired token"})
 
     }
 }
